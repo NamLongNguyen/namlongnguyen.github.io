@@ -134,7 +134,55 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  formBtn.setAttribute('disabled', '')
 
+  const name = document.getElementById("fullName");
+  const email = document.getElementById("email");
+  const message = document.getElementById("message");
+
+  try {
+    await sendEmail({email, name, message})
+    const sentNoti = document.getElementById('sent-noti')
+    sentNoti.classList.remove('hidden')
+    name.value = ''
+    email.value = ''
+    message.value = ''
+  }
+  catch(e) {
+    const errNoti = document.getElementById('err-noti')
+    errNoti.classList.remove('hidden')
+    errNoti.innerText += ' ' + e.message
+  }
+  finally {
+    formBtn.removeAttribute("disabled");
+  }
+});
+
+async function sendEmail(fields) {
+  const emailEndpointURL = 'https://email-sender-service-yimn.onrender.com/mailer/nguyennamlong241@gmail.com'
+
+  let text = `
+  <p>Email: ${fields.email.value}</p>
+  <p>Name: ${fields.name.value}</p>
+  <p>Message: ${fields.message.value}</p>
+  `;
+
+  const res = await fetch(emailEndpointURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      subject: `From Portfolio: ${fields.name.value}`,
+      text,
+    }),
+  });
+
+  const data = await res.json()
+  if(!res.ok) throw new Error(data.message)
+}
 
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
