@@ -1502,8 +1502,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   /**
    * #RESUME
    */
-
-  .timeline-list { margin-left: 65px; }
+   .timeline-list { margin-left: 65px; }
 
   .timeline-item:not(:last-child)::before { left: -40px; }
 
@@ -1894,29 +1893,4 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .timeline-text { max-width: 700px; }
 
-  #sent-noti {
-    width: 100%;
-    padding: 20px;
-    background-color: seagreen;
-    text-align: center;
-    border: 3px solid forestgreen;
-    border-radius: 10px;
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-
-  #err-noti {
-    width: 100%;
-    padding: 20px;
-    background-color: darkred;
-    text-align: center;
-    border: 3px solid darkred;
-    border-radius: 10px;
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-
-  .hidden {
-    display: none !important;
-  }
 }
